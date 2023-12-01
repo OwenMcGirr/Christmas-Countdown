@@ -24,12 +24,14 @@
         <ScrollView>
             <!-- Frame with adjusted VerticalOptions -->
             <Frame Padding="10" Margin="20" CornerRadius="10" BorderColor="Black" BackgroundColor="White" Opacity="0.6" VerticalOptions="Start">
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding SwitchTimeUnitCommand}" NumberOfTapsRequired="1" />
+                </Frame.GestureRecognizers>
                 <VerticalStackLayout Padding="30,0" Spacing="25">
                     <!-- Your existing content here -->
                     <Label Text="Christmas Countdown" FontSize="25" HorizontalOptions="Center" TextColor="Red" FontAttributes="Bold" />
                     <Label Text="How long until Christmas?" FontSize="20" HorizontalOptions="Center" TextColor="Red" FontAttributes="Bold" />
                     <Label Text="{Binding TimeLeft}" FontSize="20" HorizontalOptions="Center" TextColor="Red" FontAttributes="Bold" />
-                    <Button Text="Switch" Command="{Binding SwitchTimeUnitCommand}" HorizontalOptions="Center" TextColor="Red" FontAttributes="Bold" />
                 </VerticalStackLayout>
             </Frame>
         </ScrollView>

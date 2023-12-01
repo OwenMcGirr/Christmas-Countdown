@@ -17,7 +17,18 @@
         // Function to refresh the bobbles
         private void RefreshBobbles(object sender, System.Timers.ElapsedEventArgs e)
         {
-            bobbleView.Invalidate();
+            // If iOS, refresh the bobbles on the main thread
+            if (DeviceInfo.Platform == DevicePlatform.iOS)
+            {
+                MainThread.BeginInvokeOnMainThread(() =>
+                {
+                    bobbleView.Invalidate();
+                });
+            }
+            else
+            {
+                bobbleView.Invalidate();
+            }
         }
 
     }
