@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:Christmas_Countdown.View_Models_and_Logic"
+             xmlns:controls="clr-namespace:ChristmasCountdown.Controls"
+             x:Class="Christmas_Countdown.MainPage">
+
+    <ContentPage.BindingContext>
+        <local:MainPageViewModel />
+    </ContentPage.BindingContext>
+
+    <ContentPage.Resources>
+        <controls:BobbleDrawable x:Key="bobble" />
+    </ContentPage.Resources>
+
+    <Grid>
+        <GraphicsView 
+            x:Name="bobbleView"
+            Drawable="{StaticResource bobble}"
+            HorizontalOptions="FillAndExpand"
+            VerticalOptions="FillAndExpand" />
+
+        <!-- ScrollView wraps the Frame -->
+        <ScrollView>
+            <!-- Frame with adjusted VerticalOptions -->
+            <Frame Padding="10" Margin="20" CornerRadius="10" BorderColor="Black" BackgroundColor="White" Opacity="0.6" VerticalOptions="Start">
+                <VerticalStackLayout Padding="30,0" Spacing="25">
+                    <!-- Your existing content here -->
+                    <Label Text="Christmas Countdown" FontSize="25" HorizontalOptions="Center" TextColor="Red" FontAttributes="Bold" />
+                    <Label Text="How long until Christmas?" FontSize="20" HorizontalOptions="Center" TextColor="Red" FontAttributes="Bold" />
+                    <Label Text="{Binding TimeLeft}" FontSize="20" HorizontalOptions="Center" TextColor="Red" FontAttributes="Bold" />
+                    <Button Text="Switch" Command="{Binding SwitchTimeUnitCommand}" HorizontalOptions="Center" TextColor="Red" FontAttributes="Bold" />
+                </VerticalStackLayout>
+            </Frame>
+        </ScrollView>
+    </Grid>
+</ContentPage>
