@@ -87,22 +87,32 @@
             // Calculate time until Christmas
             TimeSpan timeUntilChristmas = christmasDate - currentDate;
 
-            // Return time until Christmas as a string
-            // Just return rounded numbers of months, days, hours, minutes, seconds
+            // Method to return singular or plural unit based on the value
+            string GetUnitName(double value, string unit) => value == 1 ? unit : unit + "s";
+
+            // Return time until Christmas as a string with correct singular or plural units
             switch (_selectedUnit)
             {
                 case TimeUnits.Months:
-                    return Math.Round(timeUntilChristmas.TotalDays / 30).ToString() + " Months";
+                    double months = timeUntilChristmas.TotalDays / 30;
+                    return $"{Math.Floor(months)} {GetUnitName(months, "Month")}";
                 case TimeUnits.Days:
-                    return Math.Round(timeUntilChristmas.TotalDays).ToString() + " Days";
+                    // Seconds in a day = 86400
+                    double days = timeUntilChristmas.TotalSeconds / 86400;
+                    // Account for today as a whole day
+                    days += 1;
+                    return $"{Math.Floor(days)} {GetUnitName(days, "Day")}";
                 case TimeUnits.Hours:
-                    return Math.Round(timeUntilChristmas.TotalHours).ToString() + " Hours";
+                    double hours = timeUntilChristmas.TotalHours;
+                    return $"{Math.Floor(hours)} {GetUnitName(hours, "Hour")}";
                 case TimeUnits.Minutes:
-                    return Math.Round(timeUntilChristmas.TotalMinutes).ToString() + " Minutes";
+                    double minutes = timeUntilChristmas.TotalMinutes;
+                    return $"{Math.Floor(minutes)} {GetUnitName(minutes, "Minute")}";
                 case TimeUnits.Seconds:
-                    return Math.Round(timeUntilChristmas.TotalSeconds).ToString() + " Seconds";
+                    double seconds = timeUntilChristmas.TotalSeconds;
+                    return $"{Math.Floor(seconds)} {GetUnitName(seconds, "Second")}";
                 default:
-                    return Math.Round(timeUntilChristmas.TotalDays).ToString() + " Days";
+                    return $"{Math.Floor(timeUntilChristmas.TotalDays)} {GetUnitName(timeUntilChristmas.TotalDays, "Day")}";
             }
         }
     }
